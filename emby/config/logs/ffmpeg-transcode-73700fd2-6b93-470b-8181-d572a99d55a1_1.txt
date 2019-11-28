@@ -1,0 +1,145 @@
+2019-11-28 17:18:12.548
+Emby Server version: 4.3.0.30
+
+App: Emby Web 4.3.0.30
+Chrome
+
+http://emby.readler.local:8096/videos/6/hls1/main/0.ts?DeviceId=TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgMTAuMDsgV2luNjQ7IHg2NCkgQXBwbGVXZWJLaXQvNTM3LjM2IChLSFRNTCwgbGlrZSBHZWNrbykgQ2hyb21lLzc4LjAuMzkwNC45NyBTYWZhcmkvNTM3LjM2fDE1NzQ5NjAzNDQxODE1&MediaSourceId=0eed430cd545041fbcb22911c907894a&PlaySessionId=4ffca12795044737825edddabd5ebb0c&api_key=33e434ff7d324e33b5f9af8285815831&VideoCodec=h264&AudioCodec=mp3,aac&VideoBitrate=139808000&AudioBitrate=192000&AudioStreamIndex=2&TranscodingMaxAudioChannels=2&SegmentContainer=ts&MinSegments=1&BreakOnNonKeyFrames=True&ManifestSubtitles=vtt&h264-profile=high,main,baseline,constrainedbaseline,high10&h264-level=51&TranscodeReasons=VideoCodecNotSupported
+
+{"Protocol":"File","Id":"0eed430cd545041fbcb22911c907894a","Path":"/home/medias/complete/Shingeki No Kyojin S01/[Xspitfire911] Shingeki No Kyojin S01E01 BDRIP 1080p X265 10bit Vostfr.mkv","Type":"Default","Container":"mkv","Size":1375711863,"Name":"[Xspitfire911] E01 BDRIP 1080p X265 10bit Vostfr","IsRemote":false,"RunTimeTicks":15409560000,"SupportsTranscoding":true,"SupportsDirectStream":true,"SupportsDirectPlay":true,"IsInfiniteStream":false,"RequiresOpening":false,"RequiresClosing":false,"RequiresLooping":false,"SupportsProbing":false,"MediaStreams":[{"Codec":"ass","Language":"fre","TimeBase":"1/1000","CodecTimeBase":"0/1","DisplayTitle":"French (Default ASS)","DisplayLanguage":"French","IsInterlaced":false,"IsDefault":true,"IsForced":false,"Type":"Subtitle","Index":0,"IsExternal":false,"IsTextSubtitleStream":true,"SupportsExternalStream":true,"Protocol":"File","Level":0},{"Codec":"hevc","ColorTransfer":"bt709","ColorPrimaries":"bt709","ColorSpace":"bt709","TimeBase":"1/1000","CodecTimeBase":"1001/24000","VideoRange":"SDR","DisplayTitle":"1080p HEVC","IsInterlaced":false,"BitRate":7142121,"RefFrames":1,"IsDefault":true,"IsForced":false,"Height":1080,"Width":1920,"AverageFrameRate":23.9760246,"RealFrameRate":23.9760246,"Profile":"Main 10","Type":"Video","AspectRatio":"16:9","Index":1,"IsExternal":false,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Protocol":"File","PixelFormat":"yuv420p10le","Level":153,"IsAnamorphic":false},{"Codec":"flac","Language":"jpn","TimeBase":"1/1000","CodecTimeBase":"1/48000","Title":"Stereo","DisplayTitle":"Japanese FLAC stereo (Default)","DisplayLanguage":"Japanese","IsInterlaced":false,"ChannelLayout":"stereo","BitDepth":16,"Channels":2,"SampleRate":48000,"IsDefault":true,"IsForced":false,"Type":"Audio","Index":2,"IsExternal":false,"IsTextSubtitleStream":false,"SupportsExternalStream":false,"Protocol":"File","Level":0}],"Formats":[],"Bitrate":7142121,"RequiredHttpHeaders":{},"ReadAtNativeFramerate":false}
+
+User policy for abdalem: EnablePlaybackRemuxing: True EnableVideoPlaybackTranscoding: True EnableAudioPlaybackTranscoding: True
+
+Affected codecs:
+>>>>>>  libx264 Software Encoder
+        Color Formats: YUV420P, YUVJ420P, YUV422P, YUVJ422P, YUV444P, YUVJ444P, NV12, NV16, NV21, YUV420P10, YUV422P10, YUV444P10, NV20
+        Profiles: Baseline Profile (Level 6.2), Main Profile (Level 6.2), High Profile (Level 6.2), High 10 Profile (Level 6.2), High 4:2:2 Profile (Level 6.2), High 4:4:4 Profile (Level 6.2)
+
+
+>>>>>>  FindVideoDecoder - MediaType: hevc, Mode: Automatic
+Info    FindVideoDecoder - Checking: 'Automatic software decoder' (Priority: 0)
+Info    FindVideoDecoder - Check successful - selecting 'Automatic software decoder'
+
+>>>>>>  FindVideoEncoder - Media: h264, UseHardwareCodecs: True, Mode: Automatic
+Info    FindVideoEncoder - Checking: 'libx264 Software Encoder' (Priority: 0)
+Info    Encoder supports input stream
+Info    FindVideoEncoder - Check successful - selecting 'libx264 Software Encoder'
+
+/bin/ffmpeg -loglevel +timing -f matroska -i file:"/home/medias/complete/Shingeki No Kyojin S01/[Xspitfire911] Shingeki No Kyojin S01E01 BDRIP 1080p X265 10bit Vostfr.mkv" -threads 0 -map 0:1 -map 0:2 -sn -c:v:0 libx264 -pix_fmt yuv420p  -maxrate 14284242 -bufsize 28568484 -preset veryfast -profile:v:0 high -level:v:0 4.1 -crf 23 -x264opts:0 subme=0:me_range=4:rc_lookahead=10:me=dia:no_chroma_me:8x8dct=0:partitions=none -g:v:0 72 -keyint_min:v:0 72 -sc_threshold:v:0 0  -copyts -vsync -1 -codec:a:0 libmp3lame -metadata:s:a:0 language=jpn -disposition:a:0 default -ac:a:0 2 -ab:a:0 192000  -f segment -max_delay 5000000 -avoid_negative_ts disabled -map_metadata -1 -map_chapters -1 -start_at_zero -segment_time 3  -individual_header_trailer 0 -segment_format mpegts -segment_write_temp 1 -segment_list_type m3u8 -segment_start_number 0 -segment_list "/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8" -y "/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3%d.ts"
+
+17:18:12.605 ffmpeg version 4.3.0-emby_2019_11_09 Copyright (c) 2000-2019 the FFmpeg developers and softworkz for Emby LLC
+17:18:12.606   built with gcc 8.3.0 (crosstool-NG 1.24.0)
+17:18:12.606 Execution Date: 2019-11-28 17:18:12
+17:18:12.612 Input #0, matroska,webm, from 'file:/home/medias/complete/Shingeki No Kyojin S01/[Xspitfire911] Shingeki No Kyojin S01E01 BDRIP 1080p X265 10bit Vostfr.mkv':
+17:18:12.612   Metadata:
+17:18:12.612     title           : Xspitfire911
+17:18:12.612     encoder         : libebml v1.3.9 + libmatroska v1.5.2
+17:18:12.612     creation_time   : 2019-10-03T18:32:32.000000Z
+17:18:12.612   Duration: 00:25:40.96, start: 0.000000, bitrate: 7142 kb/s
+17:18:12.612     Stream #0:0(fre): Subtitle: ass (default)
+17:18:12.612     Metadata:
+17:18:12.612       BPS-eng         : 85
+17:18:12.612       DURATION-eng    : 00:23:18.320000000
+17:18:12.612       NUMBER_OF_FRAMES-eng: 278
+17:18:12.612       NUMBER_OF_BYTES-eng: 14994
+17:18:12.612     Stream #0:1: Video: hevc (Main 10), yuv420p10le(tv, bt709), 1920x1080 [SAR 1:1 DAR 16:9], Level 153, 23.98 fps, 23.98 tbr, 1k tbn, 23.98 tbc (default)
+17:18:12.612     Metadata:
+17:18:12.612       BPS-eng         : 6470196
+17:18:12.612       DURATION-eng    : 00:25:40.956000000
+17:18:12.612       NUMBER_OF_FRAMES-eng: 36946
+17:18:12.612       NUMBER_OF_BYTES-eng: 1246285931
+17:18:12.612     Stream #0:2(jpn): Audio: flac, 48000 Hz, stereo, s16 (default)
+17:18:12.612     Metadata:
+17:18:12.612       title           : Stereo
+17:18:12.612       BPS-eng         : 669994
+17:18:12.612       DURATION-eng    : 00:25:40.896000000
+17:18:12.612       NUMBER_OF_FRAMES-eng: 16051
+17:18:12.612       NUMBER_OF_BYTES-eng: 129049049
+17:18:12.613 Stream mapping:
+17:18:12.613   Stream #0:1 -> #0:0 (hevc (native) -> h264 (libx264))
+17:18:12.613   Stream #0:2 -> #0:1 (flac (native) -> mp3 (libmp3lame))
+17:18:12.613 Press [q] to stop, [?] for help
+17:18:12.673 [libx264 @ 0xd74e40] using SAR=1/1
+17:18:12.674 [libx264 @ 0xd74e40] using cpu capabilities: MMX2 SSE2Fast SSSE3 SSE4.2 AVX FMA3 BMI2 AVX2
+17:18:12.901 [libx264 @ 0xd74e40] profile Main, level 4.1, 4:2:0, 8-bit
+17:18:12.943 [libx264 @ 0xd74e40] 264 - core 157 r2935+10 72db437 - H.264/MPEG-4 AVC codec - Copyleft 2003-2018 - http://www.videolan.org/x264.html - options: cabac=1 ref=1 deblock=1:0:0 analyse=0x1:0 me=dia subme=0 psy=1 psy_rd=1.00:0.00 mixed_ref=0 me_range=4 chroma_me=0 trellis=0 8x8dct=0 cqm=0 deadzone=21,11 fast_pskip=1 chroma_qp_offset=0 threads=6 lookahead_threads=1 sliced_threads=0 nr=0 decimate=1 interlaced=0 bluray_compat=0 constrained_intra=0 bframes=3 b_pyramid=2 b_adapt=1 b_bias=0 direct=1 weightb=1 open_gop=0 weightp=1 keyint=72 keyint_min=37 scenecut=0 intra_refresh=0 rc_lookahead=10 rc=crf mbtree=1 crf=23.0 qcomp=0.60 qpmin=0 qpmax=69 qpstep=4 vbv_maxrate=14284 vbv_bufsize=28568 crf_max=0.0 nal_hrd=none filler=0 ip_ratio=1.40 aq=1:1.00
+17:18:12.944 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd30.ts.tmp' for writing
+17:18:12.944 Output #0, segment, to '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3%d.ts':
+17:18:12.944   Metadata:
+17:18:12.944     encoder         : Lavf58.31.104
+17:18:12.944     Stream #0:0: Video: h264 (libx264), yuv420p, 1920x1080 [SAR 1:1 DAR 16:9], q=-1--1, 23.98 fps, 90k tbn, 23.98 tbc (default)
+17:18:12.944     Metadata:
+17:18:12.944       encoder         : Lavc58.56.101 libx264
+17:18:12.944     Side data:
+17:18:12.944       cpb: bitrate max/min/avg: 14284000/0/0 buffer size: 28568000 vbv_delay: N/A
+17:18:12.944     Stream #0:1(jpn): Audio: mp3 (libmp3lame), 48000 Hz, stereo, s16p, 192 kb/s (default)
+17:18:12.944     Metadata:
+17:18:12.944       encoder         : Lavc58.56.101 libmp3lame
+17:18:13.264 frame=    3 fps=0.0 q=0.0 size=       8kB time=00:00:00.31 bitrate= 206.1kbits/s throttle=off speed=0.558x    
+17:18:13.752 frame=    9 fps=8.5 q=0.0 size=       8kB time=00:00:00.31 bitrate= 206.1kbits/s throttle=off speed=0.294x    
+17:18:14.349 frame=   14 fps=8.7 q=0.0 size=      26kB time=00:00:01.08 bitrate= 196.1kbits/s throttle=off speed=0.668x    
+17:18:14.971 frame=   19 fps=8.4 q=0.0 size=      26kB time=00:00:01.08 bitrate= 196.1kbits/s throttle=off speed=0.477x    
+17:18:15.439 frame=   24 fps=8.6 q=28.0 size=      27kB time=00:00:01.08 bitrate= 206.4kbits/s throttle=off speed=0.388x    
+17:18:15.942 frame=   44 fps= 13 q=28.0 size=     173kB time=00:00:01.84 bitrate= 765.4kbits/s throttle=off speed=0.557x    
+17:18:16.441 frame=   67 fps= 18 q=28.0 size=     532kB time=00:00:02.80 bitrate=1550.2kbits/s throttle=off speed=0.734x    
+17:18:16.984 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8.tmp' for writing
+17:18:16.985 SegmentComplete=video:0 Index=0 Start=0.000000 End=3.003000 Duration=3.003000 offset_pts=0 start_pts=0 Frames=72 filename=59c20f27eb60e969f86bc427d8a15bd30.ts
+17:18:16.985 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd31.ts.tmp' for writing
+17:18:16.985 frame=   93 fps= 21 q=28.0 size=    1071kB time=00:00:04.34 bitrate=2018.7kbits/s throttle=off speed=   1x    
+17:18:17.507 frame=  113 fps= 23 q=28.0 size=    1388kB time=00:00:05.11 bitrate=2223.8kbits/s throttle=off speed=1.05x    
+17:18:18.038 frame=  129 fps= 24 q=28.0 size=    1646kB time=00:00:05.40 bitrate=2496.5kbits/s throttle=off speed=1.01x    
+17:18:18.502 frame=  145 fps= 25 q=28.0 size=    1898kB time=00:00:06.07 bitrate=2560.1kbits/s throttle=off speed=1.03x    
+17:18:19.006 frame=  154 fps= 24 q=28.0 size=    2054kB time=00:00:06.64 bitrate=2530.5kbits/s throttle=off speed=1.04x    
+17:18:19.325 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8.tmp' for writing
+17:18:19.329 SegmentComplete=video:0 Index=1 Start=3.003000 End=6.006000 Duration=3.003000 offset_pts=0 start_pts=3003000 Frames=72 filename=59c20f27eb60e969f86bc427d8a15bd31.ts
+17:18:19.329 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd32.ts.tmp' for writing
+17:18:19.528 frame=  172 fps= 25 q=28.0 size=    2393kB time=00:00:07.41 bitrate=2643.5kbits/s throttle=off speed=1.08x    
+17:18:20.032 frame=  199 fps= 27 q=28.0 size=    2465kB time=00:00:08.18 bitrate=2467.3kbits/s throttle=off speed= 1.1x    
+17:18:20.533 frame=  230 fps= 29 q=28.0 size=    2578kB time=00:00:09.52 bitrate=2215.9kbits/s throttle=off speed= 1.2x    
+17:18:20.644 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8.tmp' for writing
+17:18:20.645 SegmentComplete=video:0 Index=2 Start=6.006000 End=9.009000 Duration=3.003000 offset_pts=0 start_pts=6006000 Frames=72 filename=59c20f27eb60e969f86bc427d8a15bd32.ts
+17:18:20.645 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd33.ts.tmp' for writing
+17:18:21.044 frame=  268 fps= 32 q=28.0 size=    2853kB time=00:00:11.54 bitrate=2024.6kbits/s throttle=off speed=1.37x    
+17:18:21.567 frame=  303 fps= 34 q=28.0 size=    3162kB time=00:00:12.69 bitrate=2040.2kbits/s throttle=off speed=1.42x    
+17:18:21.671 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8.tmp' for writing
+17:18:21.674 SegmentComplete=video:0 Index=3 Start=9.009000 End=12.012000 Duration=3.003000 offset_pts=0 start_pts=9009000 Frames=72 filename=59c20f27eb60e969f86bc427d8a15bd33.ts
+17:18:21.674 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd34.ts.tmp' for writing
+17:18:22.063 frame=  340 fps= 36 q=28.0 size=    3678kB time=00:00:14.71 bitrate=2047.6kbits/s throttle=off speed=1.56x    
+17:18:22.564 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8.tmp' for writing
+17:18:22.567 SegmentComplete=video:0 Index=4 Start=12.012000 End=15.015000 Duration=3.003000 offset_pts=0 start_pts=12012000 Frames=72 filename=59c20f27eb60e969f86bc427d8a15bd34.ts
+17:18:22.567 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd35.ts.tmp' for writing
+17:18:22.588 frame=  382 fps= 38 q=28.0 size=    3944kB time=00:00:16.34 bitrate=1976.8kbits/s throttle=off speed=1.64x    
+17:18:23.101 frame=  413 fps= 39 q=28.0 size=    4102kB time=00:00:17.11 bitrate=1963.6kbits/s throttle=off speed=1.63x    
+17:18:23.606 frame=  445 fps= 40 q=28.0 size=    4304kB time=00:00:18.64 bitrate=1890.8kbits/s throttle=off speed= 1.7x    
+17:18:23.769 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8.tmp' for writing
+17:18:23.774 SegmentComplete=video:0 Index=5 Start=15.015000 End=18.018000 Duration=3.003000 offset_pts=0 start_pts=15015000 Frames=72 filename=59c20f27eb60e969f86bc427d8a15bd35.ts
+17:18:23.774 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd36.ts.tmp' for writing
+17:18:24.112 frame=  473 fps= 41 q=28.0 size=    4507kB time=00:00:20.18 bitrate=1829.3kbits/s throttle=off speed=1.76x    
+17:18:24.617 frame=  511 fps= 43 q=28.0 size=    4711kB time=00:00:21.33 bitrate=1808.6kbits/s throttle=off speed=1.78x    
+17:18:24.822 
+
+[q] command received. Exiting.
+
+17:18:24.894 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8.tmp' for writing
+17:18:24.894 SegmentComplete=video:0 Index=6 Start=18.018000 End=21.021000 Duration=3.003000 offset_pts=0 start_pts=18018000 Frames=72 filename=59c20f27eb60e969f86bc427d8a15bd36.ts
+17:18:24.894 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd37.ts.tmp' for writing
+17:18:24.934 17:18:24.937 [segment @ 0xd72f40] Opening '/config/transcoding-temp/59c20f27eb60e969f86bc427d8a15bd3.m3u8.tmp' for writing
+17:18:24.938 SegmentComplete=video:0 Index=7 Start=21.021000 End=21.688333 Duration=0.667333 offset_pts=0 start_pts=21021000 Frames=16 filename=59c20f27eb60e969f86bc427d8a15bd37.ts
+17:18:24.938 frame=  520 fps= 42 q=-1.0 Lsize=    5000kB time=00:00:22.17 bitrate=1846.9kbits/s throttle=off speed= 1.8x    
+17:18:24.938 video:4480kB audio:520kB subtitle:0kB other streams:0kB global headers:0kB muxing overhead: 0.000000%
+    Last message repeated 1 times
+17:18:24.944 EXIT
+17:18:24.945 [libx264 @ 0xd74e40] frame I:8     Avg QP:16.48  size: 80175
+17:18:24.945 [libx264 @ 0xd74e40] frame P:200   Avg QP:19.92  size: 15490
+17:18:24.945 [libx264 @ 0xd74e40] frame B:312   Avg QP:21.36  size:  2715
+17:18:24.945 [libx264 @ 0xd74e40] consecutive B-frames:  8.7% 28.1% 17.9% 45.4%
+17:18:24.945 [libx264 @ 0xd74e40] mb I  I16..4: 51.4%  0.0% 48.6%
+17:18:24.945 [libx264 @ 0xd74e40] mb P  I16..4: 23.2%  0.0%  0.0%  P16..4: 24.8%  0.0%  0.0%  0.0%  0.0%    skip:52.0%
+17:18:24.945 [libx264 @ 0xd74e40] mb B  I16..4:  3.2%  0.0%  0.0%  B16..8:  6.8%  0.0%  0.0%  direct: 3.4%  skip:86.6%  L0:43.8% L1:49.3% BI: 6.9%
+17:18:24.945 [libx264 @ 0xd74e40] coded y,uvDC,uvAC intra: 14.7% 28.7% 5.7% inter: 2.5% 7.2% 0.0%
+17:18:24.945 [libx264 @ 0xd74e40] i16 v,h,dc,p: 41% 29% 13% 18%
+17:18:24.945 [libx264 @ 0xd74e40] i4 v,h,dc,ddl,ddr,vr,hd,vl,hu: 24% 23% 13%  9%  7%  6%  6%  5%  6%
+17:18:24.945 [libx264 @ 0xd74e40] i8c dc,h,v,p: 54% 23% 17%  6%
+17:18:24.945 [libx264 @ 0xd74e40] Weighted P-Frames: Y:15.0% UV:5.0%
+17:18:24.945 [libx264 @ 0xd74e40] kb/s:1691.73
+17:18:24.947 
