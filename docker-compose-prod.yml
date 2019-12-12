@@ -32,7 +32,7 @@ services:
     restart: unless-stopped
     environment:
       VIRTUAL_PORT: "8096"
-      VIRTUAL_HOST: "emby.readler.abbi-studio.fr"
+      VIRTUAL_HOST: "emby.readler.ovh"
       AUTO_UPDATES_ON: "true"
       APP_UID: "1000"
       APP_GID: "1000"
@@ -107,7 +107,7 @@ services:
     restart: unless-stopped
     environment:
       VIRTUAL_PORT: "9091"
-      VIRTUAL_HOST: "transmission.readler.abbi-studio.fr"
+      VIRTUAL_HOST: "transmission.readler.ovh"
       APP_UID: "1000"
       APP_GID: "1000"
       TZ: Europe/London
