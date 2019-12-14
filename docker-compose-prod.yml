@@ -1,34 +1,8 @@
 version: '3.5'
 services:
-  # nginx-proxy:
-  #   container_name: abbi-play-nginx-proxy
-  #   image: jwilder/nginx-proxy
-  #   ports:
-  #     - "99:80"
-  #   volumes:
-  #     - /var/run/docker.sock:/tmp/docker.sock:ro
-  # emby-server:
-  #   # build:
-  #   #   context: .
-  #   #   dockerfile: "emby.dockerfile"
-  #   container_name: readler-emby
-  #   image: emby/embyserver
-  #   # net: host
-  #   ports:
-  #     - 8096:8096
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - $HOME/.config/embyserver:/config
-  #     - $HOME/Vidéos/abbi-play/emby:/home/medias
-  #   environment:
-  #     VIRTUAL_PORT: "8096"
-  #     VIRTUAL_HOST: "emby.abbi-studio.local"
-  #     AUTO_UPDATES_ON: "true"
-  #     APP_UID: "1000"
-  #     APP_GID: "1000"
   emby-server:
-    image: emby/embyserver
     container_name: readler-emby
+    image: emby/embyserver
     restart: unless-stopped
     environment:
       VIRTUAL_PORT: "8096"
@@ -39,7 +13,31 @@ services:
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - ./emby/config:/config
-      - ./transmission/downloads:/home/medias
+      - ./emby/medias:/home/medias
+  jackett:
+    container_name: readler-jackett
+    image: linuxserver/jackett
+    restart: unless-stopped
+    volumes:
+      - ./jackett/config:/config
+      - ./jackett/downloads:/downloads
+    environment:
+      VIRTUAL_PORT: "9117"
+      VIRTUAL_HOST: "jackett.readler.ovh"
+      APP_UID: "1000"
+      APP_GID: "1000"
+      TZ: "Europe/London"
+  syncthing:
+    container_name: readler-syncthing
+    image: syncthing/syncthing
+    restart: unless-stopped
+    volumes:
+      - ./emby/medias:/var/syncthing
+  environment:
+      VIRTUAL_PORT: "8384"
+      VIRTUAL_HOST: "sync.readler.ovh"
+      APP_UID: "1000"
+      APP_GID: "1000"
   # client:
   #   container_name: abbi-play-client
   #   build:
@@ -55,68 +53,6 @@ services:
   #     APP_UID: "1000"
   #     APP_GID: "1000"
   # api:
-  #   container_name: abbi-play-api
-  # medusa:
-  #   container_name: abbi-play-medusa
-  #   image: pymedusa/medusa
-  #   # net: host
-  #   ports:
-  #     - 8081:8081
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     # - $HOME/.config/embyserver:/config
-  #     - $HOME/Vidéos:/home/medias
-  #   environment:
-  #     VIRTUAL_PORT: "8081"
-  #     VIRTUAL_HOST: "medusa.abbi-studio.local"
-  #     APP_UID: "1000"
-  #     APP_GID: "1000"
-  # watcher:
-  #   container_name: abbi-play-watcher
-  #   image: linuxserver/watcher
-  #     # net: host
-  #   ports:
-  #     - 9090:9090
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     # - $HOME/.config/embyserver:/config
-  #     - $HOME/Vidéos:/home/medias
-  #   environment:
-  #     VIRTUAL_PORT: "9090"
-  #     VIRTUAL_HOST: "watcher.abbi-studio.local"
-  #     APP_UID: "1000"
-  #     APP_GID: "1000"
-  # jackett:
-  #   container_name: abbi-play-jackett
-  #   image: linuxserver/jackett
-  #   # net: host
-  #   ports:
-  #     - 9117:9117
-  #   volumes:
-  #     - /etc/localtime:/etc/localtime:ro
-  #     - $HOME/.config/jackett:/config
-  #     - $HOME/Vidéos:/home/medias
-  #   environment:
-  #     VIRTUAL_PORT: "9117"
-  #     VIRTUAL_HOST: "jackett.abbi-studio.local"
-  #     APP_UID: "1000"
-  #     APP_GID: "1000"
-  transmission:
-    image: linuxserver/transmission
-    container_name: readler-transmission
-    restart: unless-stopped
-    environment:
-      VIRTUAL_PORT: "9091"
-      VIRTUAL_HOST: "transmission.readler.ovh"
-      APP_UID: "1000"
-      APP_GID: "1000"
-      TZ: Europe/London
-      PUID: "1000"
-      PGID: "1000"
-    volumes:
-      - ./transmission/config:/config
-      - ./transmission/downloads:/downloads
-      - ./transmission/watch:/watch
 networks:
   default:
     external:
