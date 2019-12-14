@@ -33,7 +33,7 @@ services:
     restart: unless-stopped
     volumes:
       - ./emby/medias:/var/syncthing
-  environment:
+    environment:
       VIRTUAL_PORT: "8384"
       VIRTUAL_HOST: "sync.readler.ovh"
       APP_UID: "1000"
