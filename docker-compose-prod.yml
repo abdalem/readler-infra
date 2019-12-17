@@ -21,8 +21,8 @@ services:
     restart: unless-stopped
     volumes:
       - ./syncthing/config:/config
-      - ../medias:/medias
-      - ../jackett/blackhole:/watch
+      - ./medias:/medias
+      - ./jackett/blackhole:/watch
     environment:
       VIRTUAL_PORT: "8384"
       VIRTUAL_HOST: "sync.readler.ovh"
