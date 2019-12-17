@@ -1,43 +1,37 @@
 version: '3.5'
 services:
-  emby-server:
-    container_name: readler-emby
-    image: emby/embyserver
-    restart: unless-stopped
-    environment:
-      VIRTUAL_PORT: "8096"
-      VIRTUAL_HOST: "emby.readler.ovh"
-      AUTO_UPDATES_ON: "true"
-      APP_UID: "1000"
-      APP_GID: "1000"
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - ./emby/config:/config
-      - ./emby/medias:/home/medias
   jackett:
     container_name: readler-jackett
     image: linuxserver/jackett
     restart: unless-stopped
     volumes:
       - ./jackett/config:/config
-      - ./jackett/downloads:/downloads
+      - ./jackett/blackhole:/downloads
     environment:
       VIRTUAL_PORT: "9117"
       VIRTUAL_HOST: "jackett.readler.ovh"
       APP_UID: "1000"
       APP_GID: "1000"
-      TZ: "Europe/London"
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/Paris"
   syncthing:
     container_name: readler-syncthing
-    image: syncthing/syncthing
+    image: linuxserver/syncthing
     restart: unless-stopped
     volumes:
-      - ./emby/medias:/var/syncthing
+      - ./syncthing/config:/config
+      - ../medias:/medias
+      - ../jackett/blackhole:/watch
     environment:
       VIRTUAL_PORT: "8384"
       VIRTUAL_HOST: "sync.readler.ovh"
       APP_UID: "1000"
       APP_GID: "1000"
+      PUID: "1000"
+      PGID: "1000"
+      UMASK_SET: "022"
+      TZ: "Europe/Paris"
   # client:
   #   container_name: abbi-play-client
   #   build:
