@@ -1,5 +1,5 @@
-# jackett/config/*
-# !jackett/config/.gitkeep
+jackett/config/*
+!jackett/config/.gitkeep
 jackett/downloads/*
 !jackett/downloads/.gitkeep
 syncthing/config/*
