@@ -1,7 +1,7 @@
 jackett/config/*
 !jackett/config/.gitkeep
-jackett/downloads/*
-!jackett/downloads/.gitkeep
+jackett/blackhole/*
+!jackett/blackhole/.gitkeep
 syncthing/config/*
 !syncthing/config/.gitkeep
 medias/*
