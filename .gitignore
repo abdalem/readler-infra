@@ -6,3 +6,7 @@ syncthing/config/*
 !syncthing/config/.gitkeep
 medias/*
 !medias/.gitkeep
+jellyfin/config/*
+!jellyfin/config/.gitkeep
+jellyfin/cache/*
+!jellyfin/cache/.gitkeep

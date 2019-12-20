@@ -1,5 +1,23 @@
 version: '3.5'
 services:
+  jellyfin:
+    image: jellyfin/jellyfin
+    container_name: readler-jellyfin
+    restart: unless-stopped
+    volumes:
+      - ./jellyfin/config:/config
+      - ./jellyfin/cache:/cache
+      - ./medias:/medias
+    environment:
+      VIRTUAL_PORT: "8096"
+      VIRTUAL_HOST: "jellyfin.readler.ovh"
+      APP_UID: "1000"
+      APP_GID: "1000"
+      PUID: "1000"
+      PGID: "1000"
+      UID: "1000"
+      GID: "1000"
+      TZ: "Europe/Paris"
   jackett:
     container_name: readler-jackett
     image: linuxserver/jackett
