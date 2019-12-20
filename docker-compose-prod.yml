@@ -50,6 +50,22 @@ services:
       PGID: "1000"
       UMASK_SET: "022"
       TZ: "Europe/Paris"
+  qbitorrent:
+    container_name: readler-qbt
+    image: linuxserver/qbittorrent
+    restart: unless-stopped
+    volumes:
+      - ./qbt/config:/config
+      - ./medias:/downloads
+      - ./jackett/blackhole:/watch
+    environment:
+      VIRTUAL_PORT: "8080"
+      VIRTUAL_HOST: "qbt.readler.ovh"
+      PUID: "1000"
+      PGID: "1000"
+      TZ: "Europe/London"
+      UMASK_SET: "022"
+      WEBUI_PORT: "8080"
   # client:
   #   container_name: abbi-play-client
   #   build:

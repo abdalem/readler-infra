@@ -10,3 +10,5 @@ jellyfin/config/*
 !jellyfin/config/.gitkeep
 jellyfin/cache/*
 !jellyfin/cache/.gitkeep
+qbt/config/*
+!qbt/config/.gitkeep
