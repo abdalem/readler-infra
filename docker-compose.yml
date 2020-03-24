@@ -1,8 +1,8 @@
 version: '3.5'
 services:
   jellyfin:
-    container_name: readler-jellyfin
     image: jellyfin/jellyfin
+    container_name: readler-jellyfin
     restart: unless-stopped
     volumes:
       - ./jellyfin/config:/config
@@ -10,7 +10,7 @@ services:
       - ./medias:/medias
     environment:
       VIRTUAL_PORT: "8096"
-      VIRTUAL_HOST: "jellyfin.readler.local"
+      VIRTUAL_HOST: "jellyfin.${READLER_DOMAIN:-readler.local}"
       APP_UID: "1000"
       APP_GID: "1000"
       PUID: "1000"
@@ -27,28 +27,11 @@ services:
       - ./jackett/blackhole:/downloads
     environment:
       VIRTUAL_PORT: "9117"
-      VIRTUAL_HOST: "jackett.readler.local"
+      VIRTUAL_HOST: "jackett.${READLER_DOMAIN:-readler.local}"
       APP_UID: "1000"
       APP_GID: "1000"
       PUID: "1000"
       PGID: "1000"
-      TZ: "Europe/Paris"
-  syncthing:
-    container_name: readler-syncthing
-    image: linuxserver/syncthing
-    restart: unless-stopped
-    volumes:
-      - ./syncthing/config:/config
-      - ./medias:/medias
-      - ./jackett/blackhole:/watch
-    environment:
-      VIRTUAL_PORT: "8384"
-      VIRTUAL_HOST: "sync.readler.local"
-      APP_UID: "1000"
-      APP_GID: "1000"
-      PUID: "1000"
-      PGID: "1000"
-      UMASK_SET: "022"
       TZ: "Europe/Paris"
   qbitorrent:
     container_name: readler-qbt
@@ -60,7 +43,7 @@ services:
       - ./jackett/blackhole:/watch
     environment:
       VIRTUAL_PORT: "8080"
-      VIRTUAL_HOST: "qbt.readler.local"
+      VIRTUAL_HOST: "qbt.${READLER_DOMAIN:-readler.local}"
       PUID: "1000"
       PGID: "1000"
       TZ: "Europe/London"
