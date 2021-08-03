@@ -12,3 +12,4 @@ jellyfin/cache/*
 !jellyfin/cache/.gitkeep
 qbt/config/*
 !qbt/config/.gitkeep
+.env

@@ -1,4 +1,4 @@
-version: '3.5'
+version: "3.5"
 services:
   jellyfin:
     image: jellyfin/jellyfin
@@ -10,7 +10,9 @@ services:
       - ./medias:/medias
     environment:
       VIRTUAL_PORT: "8096"
-      VIRTUAL_HOST: "jellyfin.${READLER_DOMAIN:-readler.local}"
+      VIRTUAL_HOST: "${READLER_DOMAIN:-readler.localhost}"
+      LETSENCRYPT_HOST: "${READLER_DOMAIN:-readler.localhost}"
+      JELLYFIN_PublishedServerUrl: "${READLER_DOMAIN:-readler.localhost}"
       APP_UID: "1000"
       APP_GID: "1000"
       PUID: "1000"
@@ -27,7 +29,7 @@ services:
       - ./jackett/blackhole:/downloads
     environment:
       VIRTUAL_PORT: "9117"
-      VIRTUAL_HOST: "jackett.${READLER_DOMAIN:-readler.local}"
+      VIRTUAL_HOST: "jackett.${READLER_DOMAIN:-readler.localhost}"
       APP_UID: "1000"
       APP_GID: "1000"
       PUID: "1000"
@@ -43,27 +45,12 @@ services:
       - ./jackett/blackhole:/watch
     environment:
       VIRTUAL_PORT: "8080"
-      VIRTUAL_HOST: "qbt.${READLER_DOMAIN:-readler.local}"
+      VIRTUAL_HOST: "qbt.${READLER_DOMAIN:-readler.localhost}"
       PUID: "1000"
       PGID: "1000"
       TZ: "Europe/London"
       UMASK_SET: "022"
       WEBUI_PORT: "8080"
-  # client:
-  #   container_name: abbi-play-client
-  #   build:
-  #     context: .
-  #     dockerfile: "./client/Dockerfile"
-  #   ports:
-  #     - 100:4200
-  #   volumes:
-  #     - ./client:/usr/src/app
-  #     - ./client/node_modules:/usr/src/app/node_modules
-  #   environment:
-  #     VIRTUAL_HOST: "play.abbi-studio.local"
-  #     APP_UID: "1000"
-  #     APP_GID: "1000"
-  # api:
 networks:
   default:
     external:
