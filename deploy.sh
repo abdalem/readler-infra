@@ -1,4 +1,4 @@
-set -a; source .env: set +a;
+set -a; source .env; set +a;
 
 cd stacky
 git pull

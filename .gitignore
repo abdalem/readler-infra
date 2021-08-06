@@ -12,4 +12,8 @@ jellyfin/cache/*
 !jellyfin/cache/.gitkeep
 qbt/config/*
 !qbt/config/.gitkeep
+nextpvr/buffer/*
+!nextpvr/buffer/.gitkeep
+nextpvr/config/*
+!nextpvr/config/.gitkeep
 .env

@@ -21,8 +21,8 @@ services:
       GID: "1000"
       TZ: "Europe/Paris"
   jackett:
-    container_name: readler-jackett
     image: linuxserver/jackett
+    container_name: readler-jackett
     restart: unless-stopped
     volumes:
       - ./jackett/config:/config
@@ -36,8 +36,8 @@ services:
       PGID: "1000"
       TZ: "Europe/Paris"
   qbitorrent:
-    container_name: readler-qbt
     image: linuxserver/qbittorrent
+    container_name: readler-qbt
     restart: unless-stopped
     volumes:
       - ./qbt/config:/config
@@ -51,6 +51,16 @@ services:
       TZ: "Europe/London"
       UMASK_SET: "022"
       WEBUI_PORT: "8080"
+  nextpvr:
+    image: nextpvr/nextpvr_amd64
+    container_name: readler-nextpvr
+    restart: unless-stopped
+    volumes:
+      - ./nextpvr/config:/config
+      - ./nextpvr/videos:/buffer
+    environment:
+      VIRTUAL_PORT: "8866"
+      VIRTUAL_HOST: "pvr.${READLER_DOMAIN:-readler.localhost}"
 networks:
   default:
     external:
